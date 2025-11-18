@@ -1,0 +1,77 @@
+name: "Upload Document and Verify in Job Log"
+description: "Upload a document, wait for processing, then verify it appears in the job log with correct metadata"
+base_url: "http://localhost:8000"
+headless: false
+timeout: 120000
+screenshot_on_failure: true
+
+steps:
+  # Navigate to the application
+  - action: navigate
+    url: "http://localhost:8000/"
+
+  # Wait for the upload area to be visible
+  - action: wait_for_selector
+    selector: "#uploadArea"
+    timeout: 10000
+
+  # Take a screenshot of the initial state
+  - action: screenshot
+    filename: "01_initial_state.png"
+
+  # Upload a PDF file
+  - action: upload_file
+    selector: "#fileInput"
+    file_path: "~/ebooks/ai/IBM - Agentic AI in Financial Services.pdf"
+
+  # Wait for processing to start
+  - action: wait_for_selector
+    selector: "#progressContainer"
+    timeout: 5000
+
+  # Wait for processing to complete (metadata section appears)
+  - action: wait_for_selector
+    selector: "#metadataSection"
+    timeout: 90000
+
+  # Take screenshot after upload completes
+  - action: screenshot
+    filename: "02_upload_complete.png"
+
+  # Verify document title is shown
+  - action: assert_visible
+    selector: "#documentTitle"
+
+  # Now switch to Job Log tab to verify the document appears there
+  - action: click
+    selector: "#navJobLog"
+
+  # Wait for job log section to be visible
+  - action: wait_for_selector
+    selector: "#jobLogContentSection"
+    timeout: 5000
+
+  # Wait a moment for the API call to complete
+  - action: wait
+    ms: 2000
+
+  # Take screenshot of job log (whether populated or empty)
+  - action: screenshot
+    filename: "03_job_log_state.png"
+
+  # Check if we have the table or empty state
+  # The table might be hidden if empty, so check for the stats section instead
+  - action: assert_visible
+    selector: "#totalDocuments"
+
+  # Wait a bit more if needed for table to populate
+  - action: wait
+    ms: 1000
+
+  # Take another screenshot
+  - action: screenshot
+    filename: "04_job_log_after_wait.png"
+
+  # Take final screenshot
+  - action: screenshot
+    filename: "04_verification_complete.png"

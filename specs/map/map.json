@@ -1,0 +1,233 @@
+{
+  "nodes": [
+    {
+      "id": "main/core/exceptions.py",
+      "type": "file",
+      "label": "main/core/exceptions.py"
+    },
+    {
+      "id": "src/main/api/routes/database.py",
+      "type": "file",
+      "label": "src/main/api/routes/database.py"
+    },
+    {
+      "id": "src/main/api/main.py",
+      "type": "file",
+      "label": "src/main/api/main.py"
+    },
+    {
+      "id": "src/main/core/utils.py",
+      "type": "file",
+      "label": "src/main/core/utils.py"
+    },
+    {
+      "id": "src/main/processing/classification.py",
+      "type": "file",
+      "label": "src/main/processing/classification.py"
+    },
+    {
+      "id": "tests/nexusrag_stress_test.py",
+      "type": "file",
+      "label": "tests/nexusrag_stress_test.py"
+    },
+    {
+      "id": "tests/test_fundamentals.py",
+      "type": "file",
+      "label": "tests/test_fundamentals.py"
+    },
+    {
+      "id": "tests/test_iteration1_user_stories.py",
+      "type": "file",
+      "label": "tests/test_iteration1_user_stories.py"
+    },
+    {
+      "id": "tests/test_iteration1.py",
+      "type": "file",
+      "label": "tests/test_iteration1.py"
+    },
+    {
+      "id": "tests/test_neo4j_connection.py",
+      "type": "file",
+      "label": "tests/test_neo4j_connection.py"
+    },
+    {
+      "id": "tests/test_ui_setup.py",
+      "type": "file",
+      "label": "tests/test_ui_setup.py"
+    },
+    {
+      "id": "scripts/stress_test_50_docs.py",
+      "type": "file",
+      "label": "scripts/stress_test_50_docs.py"
+    },
+    {
+      "id": "src/main/jobs/job_database.py",
+      "type": "file",
+      "label": "src/main/jobs/job_database.py"
+    },
+    {
+      "id": "src/main/llm/providers/__init__.py",
+      "type": "file",
+      "label": "src/main/llm/providers/__init__.py"
+    },
+    {
+      "id": "src/main/loaders/__init__.py",
+      "type": "file",
+      "label": "src/main/loaders/__init__.py"
+    },
+    {
+      "id": "src/main/loaders/base_loader.py",
+      "type": "file",
+      "label": "src/main/loaders/base_loader.py"
+    },
+    {
+      "id": "src/main/loaders/markdown_loader.py",
+      "type": "file",
+      "label": "src/main/loaders/markdown_loader.py"
+    },
+    {
+      "id": "src/main/loaders/text_loader.py",
+      "type": "file",
+      "label": "src/main/loaders/text_loader.py"
+    },
+    {
+      "id": "src/main/utils/epub_extractor.py",
+      "type": "file",
+      "label": "src/main/utils/epub_extractor.py"
+    },
+    {
+      "id": "src/main/__init__.py",
+      "type": "file",
+      "label": "src/main/__init__.py"
+    },
+    {
+      "id": "src/tools/db_tool.py",
+      "type": "file",
+      "label": "src/tools/db_tool.py"
+    },
+    {
+      "id": "src/tools/llm_tool.py",
+      "type": "file",
+      "label": "src/tools/llm_tool.py"
+    },
+    {
+      "id": "src/tools/project_tool.py",
+      "type": "file",
+      "label": "src/tools/project_tool.py"
+    },
+    {
+      "id": "tests/unit/loaders/test_markdown_loader.py",
+      "type": "file",
+      "label": "tests/unit/loaders/test_markdown_loader.py"
+    },
+
+    { "id": "NexusRAGError", "type": "class", "label": "NexusRAGError" },
+    { "id": "ChunkingError", "type": "class", "label": "ChunkingError" },
+    {
+      "id": "DatabaseClearRequest",
+      "type": "class",
+      "label": "DatabaseClearRequest"
+    },
+    {
+      "id": "DatabaseMetricsResponse",
+      "type": "class",
+      "label": "DatabaseMetricsResponse"
+    },
+    { "id": "JobDatabase", "type": "class", "label": "JobDatabase" },
+    { "id": "MarkdownLoader", "type": "class", "label": "MarkdownLoader" },
+    { "id": "TextLoader", "type": "class", "label": "TextLoader" },
+    { "id": "BaseLoader", "type": "class", "label": "BaseLoader" },
+
+    {
+      "id": "get_database_metrics",
+      "type": "function",
+      "label": "get_database_metrics"
+    },
+    { "id": "clear_database", "type": "function", "label": "clear_database" },
+    {
+      "id": "get_database_status",
+      "type": "function",
+      "label": "get_database_status"
+    },
+    { "id": "read_root", "type": "function", "label": "read_root" },
+    {
+      "id": "format_file_size",
+      "type": "function",
+      "label": "format_file_size"
+    },
+    { "id": "setup_method", "type": "function", "label": "setup_method" }
+  ],
+  "edges": [
+    {
+      "from": "main/core/exceptions.py",
+      "to": "NexusRAGError",
+      "type": "contains"
+    },
+    {
+      "from": "main/core/exceptions.py",
+      "to": "ChunkingError",
+      "type": "contains"
+    },
+    {
+      "from": "src/main/api/routes/database.py",
+      "to": "DatabaseClearRequest",
+      "type": "contains"
+    },
+    {
+      "from": "src/main/api/routes/database.py",
+      "to": "DatabaseMetricsResponse",
+      "type": "contains"
+    },
+    {
+      "from": "src/main/jobs/job_database.py",
+      "to": "JobDatabase",
+      "type": "contains"
+    },
+    {
+      "from": "src/main/loaders/markdown_loader.py",
+      "to": "MarkdownLoader",
+      "type": "contains"
+    },
+    {
+      "from": "src/main/loaders/text_loader.py",
+      "to": "TextLoader",
+      "type": "contains"
+    },
+    {
+      "from": "src/main/loaders/base_loader.py",
+      "to": "BaseLoader",
+      "type": "contains"
+    },
+
+    {
+      "from": "src/main/api/routes/database.py",
+      "to": "get_database_metrics",
+      "type": "contains"
+    },
+    {
+      "from": "src/main/api/routes/database.py",
+      "to": "clear_database",
+      "type": "contains"
+    },
+    {
+      "from": "src/main/api/routes/database.py",
+      "to": "get_database_status",
+      "type": "contains"
+    },
+    { "from": "src/main/api/main.py", "to": "read_root", "type": "contains" },
+    {
+      "from": "src/main/core/utils.py",
+      "to": "format_file_size",
+      "type": "contains"
+    },
+    {
+      "from": "tests/unit/loaders/test_markdown_loader.py",
+      "to": "setup_method",
+      "type": "contains"
+    },
+
+    { "from": "ChunkingError", "to": "NexusRAGError", "type": "inherits_from" },
+    { "from": "MarkdownLoader", "to": "BaseLoader", "type": "inherits_from" },
+    { "from": "TextLoader", "to": "BaseLoader", "type": "inherits_from" }
+  ]
+}

@@ -1,0 +1,56 @@
+name: "Upload AI Ebook to NexusRAG"
+description: "Upload a random AI ebook from ~/ebooks/ai/ to NexusRAG for processing"
+base_url: "http://localhost:8000"
+headless: false
+timeout: 120000
+screenshot_on_failure: true
+
+steps:
+  # Navigate to the application
+  - action: navigate
+    url: "http://localhost:8000/"
+
+  # Wait for the upload area to be visible
+  - action: wait_for_selector
+    selector: "#uploadArea"
+    timeout: 10000
+
+  # Take a screenshot of the initial state
+  - action: screenshot
+    filename: "nexusrag_before_upload.png"
+
+  # Upload the PDF file
+  - action: upload_file
+    selector: "#fileInput"
+    file_path: "~/ebooks/ai/Agents in the Long Game of AI Computational Cognitive Modeling for Trustworthy Hybrid AI Marjorie Mcshane Sergei Nirenburg etc.pdf"
+
+  # Wait for processing to start (progress container should appear)
+  - action: wait_for_selector
+    selector: "#progressContainer"
+    timeout: 5000
+
+  # Wait a moment to see the upload happening
+  - action: wait
+    ms: 3000
+
+  # Take a screenshot during processing
+  - action: screenshot
+    filename: "nexusrag_during_upload.png"
+
+  # Wait for metadata section to appear (indicates upload completed)
+  - action: wait_for_selector
+    selector: "#metadataSection"
+    timeout: 60000
+
+  # Wait for the text section to appear
+  - action: wait_for_selector
+    selector: "#textSection"
+    timeout: 10000
+
+  # Take final screenshot
+  - action: screenshot
+    filename: "nexusrag_after_upload.png"
+
+  # Verify document title is shown
+  - action: assert_visible
+    selector: "#documentTitle"

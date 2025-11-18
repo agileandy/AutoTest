@@ -1,0 +1,94 @@
+name: "Upload and Verify Document in Job Log - STRICT"
+description: "Upload a document and STRICTLY verify it appears in the job log table with correct data"
+base_url: "http://localhost:8000"
+headless: false
+timeout: 120000
+screenshot_on_failure: true
+
+steps:
+  # ===== PART 1: UPLOAD DOCUMENT =====
+  - action: navigate
+    url: "http://localhost:8000/"
+
+  - action: wait_for_selector
+    selector: "#uploadArea"
+    timeout: 10000
+
+  - action: screenshot
+    filename: "strict_01_initial_state.png"
+
+  # Upload a specific document
+  - action: upload_file
+    selector: "#fileInput"
+    file_path: "~/ebooks/ai/How AI Works - From Sorcery to Science Ronald T Kneusel.pdf"
+
+  - action: wait_for_selector
+    selector: "#progressContainer"
+    timeout: 5000
+
+  - action: wait_for_selector
+    selector: "#metadataSection"
+    timeout: 90000
+
+  - action: screenshot
+    filename: "strict_02_upload_complete.png"
+
+  # Get the document title that was uploaded
+  - action: get_text
+    selector: "#documentTitle"
+
+  # ===== PART 2: VERIFY IN JOB LOG =====
+  # Switch to Job Log tab
+  - action: click
+    selector: "#navJobLog"
+
+  - action: wait_for_selector
+    selector: "#jobLogContentSection"
+    timeout: 5000
+
+  # Give time for API call to complete
+  - action: wait
+    ms: 3000
+
+  - action: screenshot
+    filename: "strict_03_job_log_loaded.png"
+
+  # CRITICAL: Verify the table has rows
+  - action: count_elements
+    selector: "#jobLogTable tbody tr"
+
+  # Get the total documents count
+  - action: get_text
+    selector: "#totalDocuments"
+
+  # CRITICAL: Verify at least one row exists
+  - action: assert_min_count
+    selector: "#jobLogTable tbody tr"
+    minimum: 1
+
+  # CRITICAL: Verify the document name appears in the table
+  - action: assert_text
+    selector: "#jobLogTable tbody"
+    expected: "How AI Works"
+
+  # Verify the table is visible (not hidden)
+  - action: assert_visible
+    selector: "#jobLogTable"
+
+  # Get the text from the first row to see what's there
+  - action: get_text
+    selector: "#jobLogTable tbody tr:first-child"
+
+  # Take final screenshot showing the job log with data
+  - action: screenshot
+    filename: "strict_04_job_log_verified.png"
+
+  # Execute JavaScript to get the actual job log data from the page
+  - action: evaluate_js
+    script: |
+      const rows = document.querySelectorAll('#jobLogTable tbody tr');
+      return {
+        rowCount: rows.length,
+        firstRowText: rows[0]?.textContent.trim() || 'No rows',
+        totalDocs: document.getElementById('totalDocuments')?.textContent || '0'
+      };
