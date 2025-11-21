@@ -2,6 +2,8 @@
 
 A Playwright-based browser automation testing framework that reads YAML test scripts and executes them against web applications.
 
+This is one of two different ideas I'm working on to build 'intelligent' AI based testing tools.   The other is https://github.com/agileandy/AutoPilot-Forge. Both are very much early WIP at the moment.
+
 ## Features
 
 - **YAML-based test scripts** - Write tests in simple, declarative format
